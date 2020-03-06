@@ -30,6 +30,19 @@ class _SearchPageState extends State<SearchPage> {
               } else {
                 if (store.isError()) {
                   return Text('Hubo un error al cargar tu búsqueda');
+                } else {
+                  return ListView.separated(
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                            leading:
+                                Image.network(store.results[index].bookImage),
+                            title: Text(store.results[index].bookTitle),
+                            trailing: Text(
+                                '${store.results[index].bookAuthor} , ${store.results[index].bookPublicationYear.toString()}'));
+                      },
+                      separatorBuilder: (BuildContext context, int index) =>
+                          Divider(),
+                      itemCount: store.lenght);
                 }
               }
             }),

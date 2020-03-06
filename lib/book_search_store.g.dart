@@ -9,6 +9,12 @@ part of 'book_search_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$BookSearch on _BookSearchBase, Store {
+  Computed<int> _$lenghtComputed;
+
+  @override
+  int get lenght =>
+      (_$lenghtComputed ??= Computed<int>(() => super.lenght)).value;
+
   final _$termAtom = Atom(name: '_BookSearchBase.term');
 
   @override
@@ -26,21 +32,21 @@ mixin _$BookSearch on _BookSearchBase, Store {
     }, _$termAtom, name: '${_$termAtom.name}_set');
   }
 
-  final _$totalCountAtom = Atom(name: '_BookSearchBase.totalCount');
+  final _$resultsAtom = Atom(name: '_BookSearchBase.results');
 
   @override
-  int get totalCount {
-    _$totalCountAtom.context.enforceReadPolicy(_$totalCountAtom);
-    _$totalCountAtom.reportObserved();
-    return super.totalCount;
+  List<Book> get results {
+    _$resultsAtom.context.enforceReadPolicy(_$resultsAtom);
+    _$resultsAtom.reportObserved();
+    return super.results;
   }
 
   @override
-  set totalCount(int value) {
-    _$totalCountAtom.context.conditionallyRunInAction(() {
-      super.totalCount = value;
-      _$totalCountAtom.reportChanged();
-    }, _$totalCountAtom, name: '${_$totalCountAtom.name}_set');
+  set results(List<Book> value) {
+    _$resultsAtom.context.conditionallyRunInAction(() {
+      super.results = value;
+      _$resultsAtom.reportChanged();
+    }, _$resultsAtom, name: '${_$resultsAtom.name}_set');
   }
 
   final _$searchAsyncAction = AsyncAction('search');
@@ -53,7 +59,7 @@ mixin _$BookSearch on _BookSearchBase, Store {
   @override
   String toString() {
     final string =
-        'term: ${term.toString()},totalCount: ${totalCount.toString()}';
+        'term: ${term.toString()},results: ${results.toString()},lenght: ${lenght.toString()}';
     return '{$string}';
   }
 }
