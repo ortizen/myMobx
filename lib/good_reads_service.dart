@@ -10,8 +10,9 @@ class GoodReadsService {
   final Xml2Json xml2json = Xml2Json();
 
   Future<List<Book>> getBooks(String search) async {
+    String fullUrL = _url + search;
     try {
-      var response = await http.get(_url + search);
+      var response = await http.get(fullUrL);
       xml2json.parse(response.body);
       var jsonString = xml2json.toParker();
       var data = jsonDecode(jsonString);

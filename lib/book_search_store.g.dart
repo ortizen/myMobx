@@ -9,11 +9,11 @@ part of 'book_search_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$BookSearch on _BookSearchBase, Store {
-  Computed<int> _$lenghtComputed;
+  Computed<int> _$lengthComputed;
 
   @override
-  int get lenght =>
-      (_$lenghtComputed ??= Computed<int>(() => super.lenght)).value;
+  int get length =>
+      (_$lengthComputed ??= Computed<int>(() => super.length)).value;
 
   final _$termAtom = Atom(name: '_BookSearchBase.term');
 
@@ -59,7 +59,7 @@ mixin _$BookSearch on _BookSearchBase, Store {
   @override
   String toString() {
     final string =
-        'term: ${term.toString()},results: ${results.toString()},lenght: ${lenght.toString()}';
+        'term: ${term.toString()},results: ${results.toString()},length: ${length.toString()}';
     return '{$string}';
   }
 }

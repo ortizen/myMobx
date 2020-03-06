@@ -1,3 +1,4 @@
+import 'package:Mymobx/good_reads_service.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx_provider/mobx_provider.dart';
 
@@ -11,10 +12,10 @@ abstract class _BookSearchBase extends MobxBase with Store {
   String term = '';
 
   @observable
-  List<Book> results = [];
+  List<Book> results;
 
   @computed
-  int get lenght => results.length;
+  int get length => results.length;
 
   @action
   Future search() async {
@@ -33,10 +34,14 @@ abstract class _BookSearchBase extends MobxBase with Store {
 
   void setTerm(String value) {
     this.term = value;
+    search();
   }
 
   @override
   void dispose() {}
 
-  _searchBooks(String term) {}
+  _searchBooks(String term) async {
+    GoodReadsService goodReadsService = GoodReadsService();
+    this.results = await goodReadsService.getBooks(this.term);
+  }
 }
